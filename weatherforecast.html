@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Forecast</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('#appq').hide();
+	var c =	$('#country').val();
+    $('#press').click(function(){
+
+    $('#appq').show();
+    var t = $('#sea').val();
+    	$.ajax({
+    		url:'https://api.openweathermap.org/data/2.5/weather?q= '+t+',in&appid=119d071fc13ce5d5efa21c36925a3185',
+    		success: function(data)
+    		{
+    			var k = data.main.temp - 273;
+    			
+
+    			$('#paste').html('<img src="http://openweathermap.org/img/wn/'+data.weather[0].icon+'.png"'+data.weather[0].description+'><h5 class="card-title lead">Temp :  ' +Math.floor(k)+'<sup><i class="fa fa-genderless"></i></sup>C<br>Pressure : ' +data.main.pressure+' hPa<br>Humidity : ' +data.main.humidity+' % <br>Wind Speed :  ' +data.wind.speed+' m/s</h5><br><h4 class="card-text lead" style ="text-align:center;">'+ data.name +'</h4>');
+
+
+
+    		},
+    		error:function(){
+    			alert("Some Error Occured");
+    		}
+    	
+    	})
+    	
+    }) 
+	})
+</script>
+<body style="background-image:url(https://images8.alphacoders.com/968/968255.jpg);  ">
+
+		<div class="row">
+			<div class="offset-md-8 col-md-3">
+		<h4 class=" lead text-light text-md-center mt-4" style="text-align: right" ><b>Search for country<b></h4>
+			<div class="input-group mb-3">
+  <input type="text" class="form-control" id="country" placeholder="Country name" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <div class="input-group-append">
+    <button id="hello" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+  </div>
+</div>
+		</div></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<input type="text" name="" id="sea"  placeholder="Search to check Weather "  class=" form-control" style="margin-top: 200px; margin-left: 25px;border-radius: 40px;height: 50px;background-color:#e2e2e2"><br>
+				<button id="press" class="btn btn-primary btn-block text-light" style="margin-left: 25px;border-radius: 40px;padding-left: 20px">Search Now</button><br><br><br><br>
+
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="card bg-dark text-white float-right" id="appq" style=" width: 100% ; height: 300px">
+								<img src="https://i.pinimg.com/originals/7d/f5/7f/7df57fce6c29359a0dfedc90cadb4294.jpg" class="card-img">
+								<div class="card-img-overlay">
+									<div class="card-header"><h1 class="text-md-center lead display-4"><mark>Weather Report</mark></h1></div>
+									<div class="card-body container" id="paste">
+										
+									</div>
+								</div>
+							</div>
+							
+					</div>
+			
+		</div>
+			<div class="col-md-5"></div>
+		</div>
+	</div>
+
+
+</body>
+</html>
